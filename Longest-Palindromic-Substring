@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>d
+void printSubStr(const char* str, int low, int high)
+{
+	for (int i = low; i <= high; ++i)
+		printf("%c", str[i]);
+}
+int longestPalSubstr(const char* str)
+{
+	int n = strlen(str);
+	int maxLength = 1, start = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = i; j < n; j++) {
+			int flag = 1;
+			for (int k = 0; k < (j - i + 1) / 2; k++)
+				if (str[i + k] != str[j - k])
+					flag = 0;
+			if (flag && (j - i + 1) > maxLength) {
+				start = i;
+				maxLength = j - i + 1;}}}
+	printf("Longest palindrome substring is: ");
+	printSubStr(str, start, start + maxLength - 1);
+	printf("\n");
+	return maxLength;
+}
+int main()
+{
+	const char* str = "aaaabaaa";
+	printf(longestPalSubstr(str));
+	return 0;
+}
